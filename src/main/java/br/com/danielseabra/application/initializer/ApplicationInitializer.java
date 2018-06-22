@@ -14,7 +14,8 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 	@Override
 	public void onStartup(final ServletContext servletContext) throws ServletException {
 		final AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		context.setConfigLocation("br.com.danielseabra.application.config");
+		context.setConfigLocations("br.com.danielseabra.application.config");
+
 		servletContext.addListener(new ContextLoaderListener(context));
 
 		final ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(context));
