@@ -1,11 +1,12 @@
 package br.com.danielseabra.component.validator;
 
-import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.web.multipart.MultipartFile;
 
-import br.com.danielseabra.exception.missingparameter.impl.MissingParameterException;
+import br.com.danielseabra.exception.inner.impl.MissingFilenameExtensionException;
+import br.com.danielseabra.exception.inner.impl.MissingParameterException;
 
 public interface RequestPayloadValidator {
 
-	void validateSaveStatementsPayload(JsonNode node) throws MissingParameterException;
+	void validateUploadRequestPayload(MultipartFile file, String bankName, String modelName) throws MissingParameterException, MissingFilenameExtensionException;
 
 }

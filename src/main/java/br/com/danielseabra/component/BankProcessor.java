@@ -17,28 +17,26 @@ import br.com.danielseabra.statement.Statement;
 
 public abstract class BankProcessor {
 
-	public Collection<Statement> process(final MultipartFile[] files) {
-		for (final MultipartFile file : files) {
-			try (final InputStream inputStream = file.getInputStream();
-				 final Reader reader = new InputStreamReader(inputStream);
-				 final BufferedReader bufferedReader = new BufferedReader(reader)) {
-				final Collection<Collection<String>> columnCollectionCollection = new ArrayList<>();
-				String line = bufferedReader.readLine();
-				while (null != line) {
-					final Collection<String> columnCollection = new ArrayList<>();
-					final String[] columns = line.split(CSV_SEPARATOR);
-					for (final String column : columns)
-						columnCollection.add(column);
-					columnCollectionCollection.add(columnCollection);
-					line = bufferedReader.readLine();
-				}
-				
-				return this.convert(columnCollectionCollection);
-			} catch (final IOException e) {
-				e.printStackTrace();
+	public Collection<Statement> process(final MultipartFile file) {
+		try (final InputStream inputStream = file.getInputStream();
+			final Reader reader = new InputStreamReader(inputStream);
+			final BufferedReader bufferedReader = new BufferedReader(reader)) {
+			final Collection<Collection<String>> columnCollectionCollection = new ArrayList<>();
+			String line = bufferedReader.readLine();
+			while (null != line) {
+				final Collection<String> columnCollection = new ArrayList<>();
+				final String[] columns = line.split(CSV_SEPARATOR);
+				for (final String column : columns)
+					columnCollection.add(column);
+				columnCollectionCollection.add(columnCollection);
+				line = bufferedReader.readLine();
 			}
+
+			return this.convert(columnCollectionCollection);
+		} catch (final IOException e) {
+			e.printStackTrace();
 		}
-		
+
 		return Collections.<Statement>emptyList();
 	}
 

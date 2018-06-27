@@ -1,20 +1,18 @@
 package br.com.danielseabra.util;
 
-import static br.com.danielseabra.common.RequestPayloadParameters.BANK_NAME;
-import static br.com.danielseabra.common.RequestPayloadParameters.FILE_EXTENSION_NAME;
-import static br.com.danielseabra.common.RequestPayloadParameters.MODEL_NAME;
-
-import com.fasterxml.jackson.databind.JsonNode;
-
-import br.com.danielseabra.exception.missingparameter.impl.MissingParameterException;
+import org.springframework.web.multipart.MultipartFile;
 
 public class ApplicationUtils {
 
-	public static String getBankProcessorName(final JsonNode node) throws MissingParameterException {
-		return new StringBuilder(node.get(BANK_NAME.getParameterName()).asText().toLowerCase())
-				.append(node.get(FILE_EXTENSION_NAME.getParameterName()).asText().toUpperCase())
-				.append(getCamelCasedString(node.get(MODEL_NAME.getParameterName()).asText()))
+	public static String getBankProcessorName(final String bankName, final String fileExtensionName, final String modelName) {
+		return new StringBuilder(bankName.toLowerCase())
+				.append(fileExtensionName.toUpperCase())
+				.append(getCamelCasedString(modelName))
 				.toString();
+	}
+
+	public static String getFileExtensionFromMultipartFile(final MultipartFile file) {
+		return file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
 	}
 
 	public static String getCamelCasedString(String value) {
