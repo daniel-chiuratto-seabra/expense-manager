@@ -26,7 +26,8 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/");
 
-		final MultipartConfigElement multiPartConfigElement = new MultipartConfigElement(TMP_LOCATION, MAX_FILE_SIZE, MAX_FILE_SIZE / 2, MAX_FILE_SIZE * 2);
+		final MultipartConfigElement multiPartConfigElement = new MultipartConfigElement(TMP_LOCATION, MAX_FILE_SIZE, MAX_FILE_SIZE / 2,
+				MAX_FILE_SIZE * 2);
 		dispatcher.setMultipartConfig(multiPartConfigElement);
 	}
 

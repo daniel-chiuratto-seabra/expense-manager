@@ -4,7 +4,8 @@ public enum RequestPayloadParameters {
 
 	BANK_NAME("bankName"),
 	FILE_EXTENSION_NAME("fileExtensionName"),
-	MODEL_NAME("modelName");
+	MODEL_NAME("modelName"),
+	FILE("file");
 
 	private String parameterName;
 

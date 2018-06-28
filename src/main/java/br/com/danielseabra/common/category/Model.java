@@ -1,4 +1,4 @@
-package br.com.danielseabra.common;
+package br.com.danielseabra.common.category;
 
 public enum Model {
 
