@@ -24,6 +24,8 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
+import br.com.danielseabra.common.ApplicationConstants;
+
 @Configuration
 @PropertySource("classpath:application.properties")
 @EnableWebMvc
@@ -59,7 +61,10 @@ public class ApplicationConfig implements WebMvcConfigurer {
 		final Locale locale = LocaleContextHolder.getLocale();
 		return Validation.byDefaultProvider().configure()
 				.messageInterpolator(new ResourceBundleMessageInterpolator(
-						new PlatformResourceBundleLocator("ValidationMessages_" + locale.getLanguage() + "_" + locale.getCountry())))
+						new PlatformResourceBundleLocator(
+								new StringBuilder("ValidationMessages").append(ApplicationConstants.UNDERSCORE_SEPARATOR)
+								.append(locale.getLanguage()).append(ApplicationConstants.UNDERSCORE_SEPARATOR)
+								.append(locale.getCountry()).toString())))
 				.buildValidatorFactory().getValidator();
 	}
 

@@ -11,5 +11,6 @@ public final class ApplicationConstants {
 	public static final String EMPTY = "";
 	public static final Object STRING_SPACE = " ";
 	public static final Object KEY_VALUE_PAIR_SEPARATOR = ":";
+	public static final String UNDERSCORE_SEPARATOR = "_";
 
 }
