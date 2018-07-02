@@ -15,4 +15,8 @@ public class MessageSourceUtil {
 		return this.messageSource.getMessage(messageKey, null, LocaleContextHolder.getLocale());
 	}
 
+	public String retrieveMessage(final String messageKey, final String... messagePlaceholderValues) {
+		return this.messageSource.getMessage(messageKey, messagePlaceholderValues, LocaleContextHolder.getLocale());
+	}
+
 }
