@@ -20,7 +20,7 @@ import br.com.danielseabra.exception.RequestPayloadValidationException;
 @RestControllerAdvice
 public class ExceptionHandlerControllerImpl {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ExceptionHandlerControllerImpl.class);
+	private static final Logger	LOGGER	= LoggerFactory.getLogger(ExceptionHandlerControllerImpl.class);
 
 	@Autowired
 	private MessageSourceUtil messageSourceUtil;
@@ -29,9 +29,8 @@ public class ExceptionHandlerControllerImpl {
 	public ResponseEntity<ExceptionResponsePayload<Map<String, String>>> requestPayloadValidationExceptionHandler(
 			final RequestPayloadValidationException exception) {
 		final String exceptionMessage = this.messageSourceUtil.retrieveMessage("log.message.validationerror.message");
-		if (LOGGER.isErrorEnabled()) {
+		if (LOGGER.isErrorEnabled())
 			LOGGER.error(exceptionMessage);
-		}
 		return ResponseEntity.badRequest()
 				.body(new ExceptionResponsePayloadImpl<>(ExceptionType.VALIDATION, exceptionMessage,
 						ApplicationStaticUtils.deserializeMapStringIntoMap(exception.getMessage())));
@@ -40,9 +39,8 @@ public class ExceptionHandlerControllerImpl {
 	@ExceptionHandler(MultipartException.class)
 	public ResponseEntity<ExceptionResponsePayload<String>> multipartExceptionHandler(final MultipartException exception) {
 		final String exceptionMessage = this.messageSourceUtil.retrieveMessage("log.message.fileuploadprocesserror.message");
-		if (LOGGER.isErrorEnabled()) {
+		if (LOGGER.isErrorEnabled())
 			LOGGER.error(exceptionMessage, exception);
-		}
 		return ResponseEntity.badRequest()
 				.body(new ExceptionResponsePayloadImpl<>(ExceptionType.FILE_UPLOAD, exceptionMessage, ApplicationStaticUtils.getStackTrace(exception)));
 	}
